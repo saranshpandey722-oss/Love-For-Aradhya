@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Confession for Aradhya</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    height: 100vh;
+    background: linear-gradient(to bottom right, #ff4e50, #f9d423);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: white;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1, p {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+  }
+
+  h1 { font-size: 2.5em; margin-bottom: 10px; }
+  p { font-size: 1.2em; margin: 5px 0; }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  /* Floating hearts */
+  .hearts { position: absolute; width: 20px; height: 20px; background: red; transform: rotate(-45deg); animation: float 6s linear infinite; }
+  .hearts::before, .hearts::after { content:""; position:absolute; width:20px; height:20px; background:red; border-radius:50%; }
+  .hearts::before { top:-10px; left:0; }
+  .hearts::after { left:10px; top:0; }
+  @keyframes float { 0% { transform: translateY(0) rotate(-45deg); opacity:1; } 100% { transform: translateY(-1000px) rotate(-45deg); opacity:0; } }
+
+  /* Typing effect */
+  .typing { border-right: .15em solid white; white-space: nowrap; overflow: hidden; display:inline-block; animation: typing 4s steps(40,end), blink 0.7s step-end infinite alternate; }
+  @keyframes typing { from { width:0 } to { width:100% } }
+  @keyframes blink { 50% { border-color: transparent; } }
+
+  /* Play Music Button */
+  .play-btn { margin-top:20px; padding:10px 20px; background:#ff4e50; border:none; border-radius:10px; color:white; font-size:1em; cursor:pointer; box-shadow:0 0 10px #fff; }
+  .play-btn:active { transform:scale(0.95); }
+
+  /* Confetti */
+  .confetti { position:absolute; width:10px; height:10px; opacity:0.8; pointer-events:none; animation: confettiFall 3s linear forwards; }
+  @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(800px) rotate(360deg); opacity:0; } }
+</style>
+</head>
+<body>
+
+<h1 class="typing">Aradhya, I ❤️ you 🥰</h1>
+<p class="typing" style="animation-delay: 2s;">You mean everything to me 💌💘</p>
+<p class="typing" style="animation-delay: 4s;">तुम मेरे दिल की सबसे प्यारी 🌹 कहानी हो 💖</p>
+<p class="typing" style="animation-delay: 6s;">हर पल तुम्हारे साथ बिताना चाहता हूँ 💕</p>
+
+<button class="play-btn" onclick="playMusic()">Tap to Play Music 🎵</button>
+
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<p class="typing" style="animation-delay: 8s; font-size:1em; margin-top:20px;">
+This words are not AI generated these are from my heart for yuu only 💓<br>
+Made by your chipkali🦎💖<br>
+For you<br>
+To you<br>
+And always yuu
+</p>
+
+<script>
+  // Floating hearts
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('hearts');
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.animationDuration = (Math.random()*3 + 3) + 's';
+    heart.style.width = heart.style.height = (Math.random()*20 +10) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  }
+  setInterval(createHeart,300);
+
+  // Play music
+  function playMusic() { document.getElementById('bgMusic').play(); }
+
+  // Confetti on tap
+  function createConfetti(x,y){
+    for(let i=0;i<15;i++){
+      const confetti=document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.backgroundColor=`hsl(${Math.random()*360},100%,75%)`;
+      confetti.style.left=x+Math.random()*30-15+'px';
+      confetti.style.top=y+Math.random()*30-15+'px';
+      confetti.style.animationDuration=(2+Math.random()*2)+'s';
+      document.body.appendChild(confetti);
+      setTimeout(()=>confetti.remove(),3000);
+    }
+  }
+  document.body.addEventListener('click',function(e){ createConfetti(e.clientX,e.clientY); });
+</script>
+
+</body>
+</html>
